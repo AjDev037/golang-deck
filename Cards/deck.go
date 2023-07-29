@@ -24,9 +24,10 @@ func (d deck) getRandomCard() {
 	fmt.Println("Random card picked: ", d[value])
 }
 
-//func (d deck) getDeckLength() {
-//	fmt.Println(len(d))
-//}
+func (d deck) getDeckLength() int {
+	fmt.Println(len(d))
+	return len(d)
+}
 
 func newDeck() deck {
 
@@ -66,4 +67,24 @@ func (d deck) toString() string {
 
 func (d deck) saveToFile(fileName string) error {
 	return ioutil.WriteFile(fileName, []byte(d.toString()), 0666)
+}
+
+func LoadDeck(filename string, typeOfDeck string) deck {
+	deckBytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println("Error:", err)
+		if typeOfDeck == "Deck" {
+			myDeck := newDeck()
+			myDeck.saveToFile(filename)
+			return myDeck
+		} else {
+			return deck{}
+		}
+
+	}
+
+	deckString := string(deckBytes)
+	deckValue := strings.Split(deckString, ",")
+
+	return deck(deckValue)
 }
