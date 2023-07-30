@@ -73,7 +73,7 @@ func LoadDeck(filename string, typeOfDeck string) deck {
 	deckBytes, err := ioutil.ReadFile(filename)
 	if err != nil {
 		fmt.Println("Error:", err)
-		if typeOfDeck == "Deck" {
+		if typeOfDeck == "deck" {
 			myDeck := newDeck()
 			myDeck.saveToFile(filename)
 			return myDeck

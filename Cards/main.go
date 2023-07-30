@@ -25,8 +25,23 @@ func main() {
 	//fmt.Println(cards.toString())
 	//fmt.Println("------- Saving cards ---------")
 	//cards.saveToFile("my_deck")
+	fmt.Println("------- Loading Hand ---------")
+	hand := LoadDeck("my_hand", "hand")
 	fmt.Println("------- Loading cards ---------")
-	deck := LoadDeck("my_deck")
+	my_deck := LoadDeck("my_deck", "deck")
 	fmt.Println("------- Deck loaded ---------")
-	fmt.Println(deck.getDeckLength())
+	fmt.Println(my_deck.getDeckLength())
+	if hand.getDeckLength() == 0 {
+		fmt.Println("------- Getting hand ---------")
+		hand, my_deck = getHand(my_deck)
+	} else {
+		fmt.Println("------- Your hand ---------")
+		hand.printDeck()
+	}
+
+	fmt.Println(my_deck.getDeckLength())
+	fmt.Println("------- Saving Hand ---------")
+	hand.saveToFile("my_hand")
+	fmt.Println("------- Saving Deck ---------")
+	my_deck.saveToFile("my_deck")
 }
